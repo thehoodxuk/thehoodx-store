@@ -28,7 +28,7 @@ export function CartSheet({ children }: CartSheetProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex w-full flex-col sm:max-w-lg">
+      <SheetContent className="flex w-[90vw] max-w-lg flex-col p-6 sm:w-full">
         <SheetHeader>
           <SheetTitle>Shopping Cart ({totalItems})</SheetTitle>
         </SheetHeader>

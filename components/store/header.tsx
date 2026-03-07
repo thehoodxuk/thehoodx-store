@@ -27,7 +27,7 @@ export function Header() {
           TAKEN.
         </div>
       </div>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-4 sm:px-6 lg:px-8">
         {/* Mobile menu button */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild className="lg:hidden">
@@ -36,7 +36,7 @@ export function Header() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-75 sm:w-87.5">
+          <SheetContent side="left" className="w-[85vw] max-w-sm p-6">
             <nav className="flex flex-col gap-4 pt-8">
               <Link
                 href="/"
@@ -119,7 +119,7 @@ export function Header() {
         </nav>
 
         {/* Right side actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           {/* Search */}
           {searchOpen ? (
             <div className="absolute inset-x-0 top-0 z-50 flex h-16 items-center gap-2 bg-background px-4 sm:px-6 lg:px-8">

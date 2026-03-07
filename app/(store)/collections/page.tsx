@@ -107,7 +107,7 @@ function CollectionsContent() {
               )}
             </Button>
           </SheetTrigger>
-          <SheetContent side="left">
+          <SheetContent side="left" className="w-[85vw] max-w-sm p-6">
             <SheetHeader>
               <SheetTitle className="text-xs font-bold uppercase tracking-widest">
                 Filters
