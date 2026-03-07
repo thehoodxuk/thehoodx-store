@@ -39,6 +39,13 @@ export function Header() {
           <SheetContent side="left" className="w-75 sm:w-87.5">
             <nav className="flex flex-col gap-4 pt-8">
               <Link
+                href="/"
+                className="text-lg font-medium text-foreground transition-colors hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Accueil
+              </Link>
+              <Link
                 href="/collections"
                 className="text-lg font-medium text-foreground transition-colors hover:text-primary"
                 onClick={() => setMobileMenuOpen(false)}
@@ -98,6 +105,12 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex lg:items-center lg:gap-8">
           <Link
+            href="/"
+            className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+          >
+            Accueil
+          </Link>
+          <Link
             href="/collections"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
@@ -135,6 +148,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
+              className="cursor-pointer"
               onClick={() => setSearchOpen(true)}
             >
               <Search className="h-5 w-5" />
@@ -144,7 +158,7 @@ export function Header() {
 
           {/* User */}
           <Link href={user ? "/account" : "/login"}>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <User className="h-5 w-5" />
               <span className="sr-only">{user ? "Account" : "Sign in"}</span>
             </Button>
@@ -152,7 +166,11 @@ export function Header() {
 
           {/* Cart */}
           <CartSheet>
-            <Button variant="ghost" size="icon" className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative cursor-pointer"
+            >
               <ShoppingBag className="h-5 w-5" />
               {totalItems > 0 && (
                 <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">
