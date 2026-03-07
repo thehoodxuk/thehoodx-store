@@ -139,10 +139,9 @@ export default function CheckoutPage() {
       // ── Demo: simulate success ──
       await new Promise((resolve) => setTimeout(resolve, 1500));
       clearCart();
-      toast.success("Order placed successfully!");
-      router.push("/");
+      router.push("/checkout/success");
     } catch {
-      toast.error("Payment failed. Please try again.");
+      router.push("/checkout/failed");
     } finally {
       setIsProcessing(false);
     }
