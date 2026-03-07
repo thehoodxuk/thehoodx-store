@@ -132,7 +132,7 @@ export function Header() {
                 autoFocus
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && searchQuery.trim()) {
-                    window.location.href = `/products?search=${encodeURIComponent(searchQuery)}`;
+                    window.location.href = `/collections?search=${encodeURIComponent(searchQuery)}`;
                   }
                 }}
               />

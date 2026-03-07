@@ -36,7 +36,7 @@ export function CartSheet({ children }: CartSheetProps) {
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
             <p className="text-muted-foreground">Your cart is empty</p>
-            <Link href="/products">
+            <Link href="/collections">
               <Button>Continue Shopping</Button>
             </Link>
           </div>
