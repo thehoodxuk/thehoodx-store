@@ -36,7 +36,7 @@ export function Header() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[85vw] max-w-sm p-6">
+          <SheetContent side="left" className="p-6 sm:max-w-sm">
             <nav className="flex flex-col gap-4 pt-8">
               <Link
                 href="/"
