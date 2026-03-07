@@ -60,7 +60,11 @@ export function CartSheet({ children }: CartSheetProps) {
                 <span>Total</span>
                 <span>{formatPrice(totalPrice)}</span>
               </div>
-              <Link href="/checkout" className="w-full">
+              <Link
+                href="/checkout"
+                className="w-full"
+                onClick={() => setOpen(false)}
+              >
                 <Button className="w-full" size="lg">
                   Checkout
                 </Button>
