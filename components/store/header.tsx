@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ShoppingBag, User, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/context/cart-context";
 import { useAuth } from "@/context/auth-context";
-import { CATEGORIES } from "@/lib/types";
 import { CartSheet } from "./cart-sheet";
 
 export function Header() {
@@ -20,6 +20,13 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+      {/* Marquee banner */}
+      <div className="overflow-hidden bg-primary text-primary-foreground py-1.5">
+        <div className="animate-marquee whitespace-nowrap text-xs font-medium tracking-widest uppercase">
+          WE DON&apos;T FOLLOW TRENDS. WE SET THEM. — NO THRONE GIVEN. ONLY
+          TAKEN.
+        </div>
+      </div>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Mobile menu button */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -32,22 +39,12 @@ export function Header() {
           <SheetContent side="left" className="w-75 sm:w-87.5">
             <nav className="flex flex-col gap-4 pt-8">
               <Link
-                href="/products"
+                href="/collections"
                 className="text-lg font-medium text-foreground transition-colors hover:text-primary"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                All Products
+                Collection
               </Link>
-              {CATEGORIES.map((category) => (
-                <Link
-                  key={category.value}
-                  href={`/products?category=${category.value}`}
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {category.label}
-                </Link>
-              ))}
               <hr className="my-4" />
               {user ? (
                 <>
@@ -83,28 +80,29 @@ export function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight text-foreground">
-            Base44
+          <Image
+            src="/logo-thehoodx.png"
+            alt="The-Hoodx"
+            width={56}
+            height={56}
+            className="h-14 w-14 object-contain"
+          />
+          <span
+            className="text-xl font-black uppercase tracking-[0.15em] text-foreground"
+            style={{ fontFamily: "'Arial Black', 'Impact', sans-serif" }}
+          >
+            THE-HØØDX
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex lg:items-center lg:gap-8">
           <Link
-            href="/products"
+            href="/collections"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
-            All Products
+            Collections
           </Link>
-          {CATEGORIES.map((category) => (
-            <Link
-              key={category.value}
-              href={`/products?category=${category.value}`}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {category.label}
-            </Link>
-          ))}
         </nav>
 
         {/* Right side actions */}

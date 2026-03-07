@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -7,12 +8,21 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">B</span>
-              </div>
-              <span className="font-bold text-lg">THE-HØØDX</span>
-            </div>
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <Image
+                src="/logo-thehoodx.png"
+                alt="The-Hoodx"
+                width={48}
+                height={48}
+                className="h-12 w-12 object-contain"
+              />
+              <span
+                className="text-lg font-black uppercase tracking-[0.15em]"
+                style={{ fontFamily: "'Arial Black', 'Impact', sans-serif" }}
+              >
+                THE-HØØDX
+              </span>
+            </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Streetwear premium. Conçu pour le confort, pensé pour le style.
             </p>
