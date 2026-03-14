@@ -1,21 +1,5 @@
 import { z } from "zod";
 
-export const UserSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string().email(),
-  role: z.string(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-});
-export type User = z.infer<typeof UserSchema>;
-
-export const AuthResponseSchema = z.object({
-  user: UserSchema,
-  accessToken: z.string(),
-  message: z.string().optional(),
-});
-
 export const CategorySchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -77,18 +61,3 @@ export const CheckoutSessionSchema = z.object({
   customerEmail: z.string().optional(),
 });
 export type CheckoutSession = z.infer<typeof CheckoutSessionSchema>;
-
-export const LoginInputSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(1, { message: "Password is required" }),
-});
-export type LoginInput = z.infer<typeof LoginInputSchema>;
-
-export const SignupInputSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" }),
-});
-export type SignupInput = z.infer<typeof SignupInputSchema>;

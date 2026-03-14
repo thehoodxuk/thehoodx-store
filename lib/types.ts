@@ -12,13 +12,6 @@ export interface CartItem {
   color: string;
 }
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  isAdmin: boolean;
-}
-
 export interface Order {
   id: string;
   userId: string;

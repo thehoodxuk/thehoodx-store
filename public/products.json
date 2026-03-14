@@ -1,0 +1,122 @@
+[
+  {
+    "id": "hd-dynasty-black",
+    "name": "HD Dynasty - Black",
+    "description": "Premium quality HD Dynasty design in black.",
+    "price": 35,
+    "image": "/collections/black-h-d-dynasty.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "royal-black",
+    "name": "Royal - Black",
+    "description": "The Royal edition in classic black.",
+    "price": 35,
+    "image": "/collections/black-r-yal.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "throne-black",
+    "name": "Throne - Black",
+    "description": "Claim your throne in black.",
+    "price": 35,
+    "image": "/collections/black-throne.jpg",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "edition-1-blue",
+    "name": "Edition 1 - Blue",
+    "description": "The first edition classic in blue.",
+    "price": 35,
+    "image": "/collections/blue-edition-1.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Blue"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "edition-1-brown",
+    "name": "Edition 1 - Brown",
+    "description": "The first edition classic in brown.",
+    "price": 35,
+    "image": "/collections/brown-edition-1.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Brown"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "edition-1-pink",
+    "name": "Edition 1 - Pink",
+    "description": "The first edition classic in pink.",
+    "price": 35,
+    "image": "/collections/pink-edition-1.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Pink"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "hd-dynasty-stone",
+    "name": "HD Dynasty - Stone",
+    "description": "Premium quality HD Dynasty design in stone.",
+    "price": 35,
+    "image": "/collections/stone-h-d-dynasty.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Stone"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "throne-stone",
+    "name": "Throne - Stone",
+    "description": "Claim your throne in stone.",
+    "price": 35,
+    "image": "/collections/stone-throne.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Stone"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "hd-dynasty-white",
+    "name": "HD Dynasty - White",
+    "description": "Premium quality HD Dynasty design in white.",
+    "price": 35,
+    "image": "/collections/white-h-d-dynasty.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["White"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "royal-white",
+    "name": "Royal - White",
+    "description": "The Royal edition in clean white.",
+    "price": 35,
+    "image": "/collections/white-r-yal.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["White"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "edition-1-white",
+    "name": "Edition 1 - White",
+    "description": "The first edition classic in white.",
+    "price": 35,
+    "image": "/collections/white-edition-1.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["White"],
+    "categoryId": "tshirt"
+  },
+  {
+    "id": "throne-white",
+    "name": "Throne - White",
+    "description": "Claim your throne in white.",
+    "price": 35,
+    "image": "/collections/white-throne.jpg",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["White"],
+    "categoryId": "tshirt"
+  }
+]

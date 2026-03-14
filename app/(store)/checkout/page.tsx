@@ -8,16 +8,9 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Lock,
-  ShieldCheck,
-  UserRound,
-} from "lucide-react";
+import { ArrowLeft, Lock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/store/useAuthStore";
 import { useCartStore } from "@/store/useCartStore";
 import { formatPrice } from "@/lib/utils";
 
@@ -33,11 +26,10 @@ const shippingSchema = z.object({
 type ShippingFormData = z.infer<typeof shippingSchema>;
 
 export default function CheckoutPage() {
-  const user = useAuthStore((state) => state.user);
   const items = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.getTotalPrice());
   const clearCart = useCartStore((state) => state.clearCart);
-  
+
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -47,52 +39,7 @@ export default function CheckoutPage() {
     formState: { errors },
   } = useForm<ShippingFormData>({
     resolver: zodResolver(shippingSchema),
-    defaultValues: {
-      name: user?.name ?? "",
-    },
   });
-
-  // ── Auth Gate ──────────────────────────────────────────────
-  if (!user) {
-    return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-          <UserRound className="h-10 w-10 text-muted-foreground" />
-        </div>
-        <div className="space-y-2">
-          <h1 className="text-2xl font-black uppercase tracking-tight">
-            Sign in to Checkout
-          </h1>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            You need an account to complete your purchase. Sign in or create one
-            to continue.
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/login?redirect=/checkout">
-            <Button className="h-12 min-w-[160px] rounded-full bg-black text-xs font-bold uppercase tracking-widest text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90">
-              Sign In
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="/signup?redirect=/checkout">
-            <Button
-              variant="outline"
-              className="h-12 min-w-[160px] rounded-full text-xs font-bold uppercase tracking-widest"
-            >
-              Create Account
-            </Button>
-          </Link>
-        </div>
-        <Link
-          href="/collections"
-          className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
-        >
-          Continue Shopping
-        </Link>
-      </div>
-    );
-  }
 
   // ── Empty Cart ─────────────────────────────────────────────
   if (items.length === 0) {
@@ -114,38 +61,35 @@ export default function CheckoutPage() {
   }
 
   // ── Stripe Checkout Handler ────────────────────────────────
-  const onSubmit = async (data: ShippingFormData) => {
+  const onSubmit = async () => {
     setIsProcessing(true);
 
     try {
-      // TODO: Replace with your actual Stripe checkout session API call
-      // Example:
-      // const res = await fetch("/api/checkout", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     items: items.map((item) => ({
-      //       productId: item.product.id,
-      //       name: item.product.name,
-      //       price: item.product.price,
-      //       quantity: item.quantity,
-      //       size: item.size,
-      //       color: item.color,
-      //     })),
-      //     shipping: data,
-      //     userId: user.id,
-      //   }),
-      // });
-      // const { url } = await res.json();
-      // window.location.href = url; // Redirect to Stripe Checkout
-
-      // ── Demo: simulate success ──
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      clearCart();
-      router.push("/checkout/success");
-    } catch {
-      router.push("/checkout/failed");
-    } finally {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+      const res = await fetch(`${backendUrl}/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // Mapping our items structure into what the backend expects
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            name: `${item.product.name} (Size: ${item.size}, Color: ${item.color})`,
+            price: item.product.price,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+      
+      const data = await res.json();
+      
+      if (data.url) {
+        window.location.href = data.url; // Redirect to Stripe Checkout
+      } else {
+        toast.error(data.error || "Failed to initiate payment processor.");
+        setIsProcessing(false);
+      }
+    } catch (e: any) {
+      toast.error("An error occurred during checkout setup.");
+      console.error(e);
       setIsProcessing(false);
     }
   };
@@ -174,19 +118,6 @@ export default function CheckoutPage() {
       >
         {/* ── Left: Shipping Form ──────────────────────────── */}
         <div className="space-y-8 lg:col-span-3">
-          {/* Logged-in banner */}
-          <div className="flex items-center gap-3 rounded-2xl border border-border bg-muted/30 p-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-foreground text-background">
-              <UserRound className="h-5 w-5" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold">{user.name}</p>
-              <p className="truncate text-xs text-muted-foreground">
-                {user.email}
-              </p>
-            </div>
-          </div>
-
           {/* Shipping fields */}
           <div className="space-y-5 rounded-xl border border-border/50 p-6">
             <h2 className="text-lg font-bold uppercase tracking-wide">
