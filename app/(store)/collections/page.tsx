@@ -151,10 +151,10 @@ function CollectionsContent() {
         </div>
       )}
 
-      <div className="mt-10 lg:grid lg:grid-cols-5 lg:gap-10">
+      <div className="mt-10 lg:grid lg:grid-cols-6 lg:gap-8">
         {/* Desktop Filters */}
-        <aside className="hidden lg:block">
-          <div className="sticky top-24">
+        <aside className="hidden lg:block lg:col-span-1">
+          <div className="sticky top-24 min-w-0">
             <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Filters
             </h2>
@@ -173,10 +173,10 @@ function CollectionsContent() {
           </div>
         </aside>
 
-        {/* Product Grid */}
-        <div className="lg:col-span-4">
+        {/* Product Grid — takes up most of the space */}
+        <div className="mt-8 lg:mt-0 lg:col-span-5">
           {isLoading ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:gap-10">
               {Array.from({ length: 6 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
@@ -198,7 +198,7 @@ function CollectionsContent() {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:gap-10">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
