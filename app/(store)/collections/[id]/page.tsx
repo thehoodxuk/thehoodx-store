@@ -228,15 +228,15 @@ export default function ProductPage({ params }: ProductPageProps) {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="mt-20 border-t border-border pt-16">
+        <section className="mt-16 border-t border-border pt-12">
           <span className="mb-2 block text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">
             More to Explore
           </span>
           <h2 className="text-2xl font-black uppercase tracking-tight sm:text-3xl">
-            You Might Also Like
+            You May Also Like
           </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {relatedProducts.map((relatedProduct: any) => (
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {relatedProducts.slice(0, 3).map((relatedProduct: any) => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
