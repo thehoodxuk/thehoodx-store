@@ -84,30 +84,16 @@ export function useCategory(idOrSlug: string) {
 
 export function useCategoryProducts(
   idOrSlug: string,
-  params?: Record<string, any>
+  params?: Record<string, any>,
 ) {
   return useQuery({
     queryKey: ["categories", idOrSlug, "products", params],
     queryFn: async () => {
-      const data = await apiClient.get(
-        `/categories/${idOrSlug}/products`,
-        { params }
-      );
+      const data = await apiClient.get(`/categories/${idOrSlug}/products`, {
+        params,
+      });
       return ProductsResponseSchema.parse(data);
     },
     enabled: !!idOrSlug,
-  });
-}
-
-// --- Auth Queries ---
-
-export function useUser() {
-  return useQuery({
-    queryKey: ["auth", "me"],
-    queryFn: async () => {
-      const data = await apiClient.get("/auth/me");
-      return data;
-    },
-    retry: false, // Don't retry if fetching user fails
   });
 }

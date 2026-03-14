@@ -3,17 +3,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ShoppingBag, User, Menu, X, Search } from "lucide-react";
+import { ShoppingBag, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCartStore } from "@/store/useCartStore";
-import { useAuthStore } from "@/store/useAuthStore";
 import { CartSheet } from "./cart-sheet";
 
 export function Header() {
   const totalItems = useCartStore((state) => state.getTotalItems());
-  const user = useAuthStore((state) => state.user);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,35 +50,6 @@ export function Header() {
               >
                 Collection
               </Link>
-              <hr className="my-4" />
-              {user ? (
-                <>
-                  <Link
-                    href="/account"
-                    className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    My Account
-                  </Link>
-                  {user.role === "ADMIN" && (
-                    <Link
-                      href="/admin"
-                      className="text-lg font-medium text-primary transition-colors hover:text-primary/80"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Admin Dashboard
-                    </Link>
-                  )}
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
-              )}
             </nav>
           </SheetContent>
         </Sheet>
@@ -155,14 +124,6 @@ export function Header() {
               <span className="sr-only">Search</span>
             </Button>
           )}
-
-          {/* User */}
-          <Link href={user ? "/account" : "/login"}>
-            <Button variant="ghost" size="icon" className="cursor-pointer">
-              <User className="h-5 w-5" />
-              <span className="sr-only">{user ? "Account" : "Sign in"}</span>
-            </Button>
-          </Link>
 
           {/* Cart */}
           <CartSheet>

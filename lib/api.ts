@@ -5,19 +5,10 @@ export const API_URL =
 
 export const apiClient = axios.create({
   baseURL: API_URL,
-  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
 });
-
-export const setAuthToken = (token: string | null) => {
-  if (token) {
-    apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete apiClient.defaults.headers.common["Authorization"];
-  }
-};
 
 export class ApiError extends Error {
   status: number;
@@ -37,10 +28,12 @@ apiClient.interceptors.response.use(
   (error: AxiosError) => {
     const status = error.response?.status || 500;
     const data = error.response?.data;
-    const message = ((data as any)?.error) || ((data as any)?.message) || error.message || "An unexpected error occurred";
-
-    // You can handle 401 Unauthorized globally here if needed (e.g., dispatch logout)
+    const message =
+      (data as any)?.error ||
+      (data as any)?.message ||
+      error.message ||
+      "An unexpected error occurred";
 
     return Promise.reject(new ApiError(message, status, data));
-  }
+  },
 );
