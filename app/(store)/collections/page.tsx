@@ -151,7 +151,7 @@ function CollectionsContent() {
         </div>
       )}
 
-      <div className="mt-10 lg:grid lg:grid-cols-4 lg:gap-10">
+      <div className="mt-10 lg:grid lg:grid-cols-5 lg:gap-10">
         {/* Desktop Filters */}
         <aside className="hidden lg:block">
           <div className="sticky top-24">
@@ -174,9 +174,9 @@ function CollectionsContent() {
         </aside>
 
         {/* Product Grid */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
           {isLoading ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12">
               {Array.from({ length: 6 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
@@ -198,7 +198,7 @@ function CollectionsContent() {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -219,7 +219,7 @@ export default function CollectionsPage() {
             <div className="h-4 w-20 rounded bg-muted" />
             <div className="mt-2 h-10 w-48 rounded bg-muted" />
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-12">
             {Array.from({ length: 8 }).map((_, i) => (
               <ProductCardSkeleton key={i} />
             ))}

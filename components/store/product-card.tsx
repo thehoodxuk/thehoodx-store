@@ -16,7 +16,7 @@ export function ProductCard({ product }: ProductCardProps) {
       href={`/collections/${product.id}`}
       className="group block overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-shadow duration-300 hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-950"
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+      <div className="relative aspect-[2/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         <Image
           src={product.image || "/placeholder.jpg"}
           alt={product.name}
@@ -58,7 +58,7 @@ export function ProductCardSkeleton() {
   return (
     <div className="animate-pulse">
       <div className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-        <div className="aspect-[3/4] bg-neutral-200 dark:bg-neutral-800" />
+        <div className="aspect-[2/3] bg-neutral-200 dark:bg-neutral-800" />
         <div className="p-4 space-y-3">
           <div className="h-4 w-3/4 rounded-full bg-neutral-200 dark:bg-neutral-800" />
           <div className="h-4 w-1/4 rounded-full bg-neutral-200 dark:bg-neutral-800" />

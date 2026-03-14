@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { CheckCircle, Package, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function OrderSuccessPage() {
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  useEffect(() => {
+    // Clear cart upon successful return from Stripe
+    clearCart();
+  }, [clearCart]);
+
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">

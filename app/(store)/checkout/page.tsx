@@ -61,37 +61,35 @@ export default function CheckoutPage() {
   }
 
   // ── Stripe Checkout Handler ────────────────────────────────
-  const onSubmit = async (data: ShippingFormData) => {
+  const onSubmit = async () => {
     setIsProcessing(true);
 
     try {
-      // TODO: Replace with your actual Stripe checkout session API call
-      // Example:
-      // const res = await fetch("/api/checkout", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     items: items.map((item) => ({
-      //       productId: item.product.id,
-      //       name: item.product.name,
-      //       price: item.product.price,
-      //       quantity: item.quantity,
-      //       size: item.size,
-      //       color: item.color,
-      //     })),
-      //     shipping: data,
-      //   }),
-      // });
-      // const { url } = await res.json();
-      // window.location.href = url; // Redirect to Stripe Checkout
-
-      // ── Demo: simulate success ──
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      clearCart();
-      router.push("/checkout/success");
-    } catch {
-      router.push("/checkout/failed");
-    } finally {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+      const res = await fetch(`${backendUrl}/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // Mapping our items structure into what the backend expects
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            name: `${item.product.name} (Size: ${item.size}, Color: ${item.color})`,
+            price: item.product.price,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+      
+      const data = await res.json();
+      
+      if (data.url) {
+        window.location.href = data.url; // Redirect to Stripe Checkout
+      } else {
+        toast.error(data.error || "Failed to initiate payment processor.");
+        setIsProcessing(false);
+      }
+    } catch (e: any) {
+      toast.error("An error occurred during checkout setup.");
+      console.error(e);
       setIsProcessing(false);
     }
   };

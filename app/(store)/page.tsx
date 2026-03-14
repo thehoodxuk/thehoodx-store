@@ -64,7 +64,7 @@ export default function Home() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12">
           {isLoading ? (
             <p className="col-span-full text-center text-muted-foreground">Loading latest drops...</p>
           ) : (
