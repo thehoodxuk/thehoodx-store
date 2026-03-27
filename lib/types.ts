@@ -1,6 +1,6 @@
 import { Product, Category as ApiCategory } from "./schema";
 
-export type CategorySlug = "tshirt" | "shorts";
+export type CategorySlug = "tshirt" | "shorts" | "hoodie";
 
 // Re-export Product so other files don't break their imports
 export type { Product, ApiCategory as Category };
@@ -31,4 +31,5 @@ export interface Order {
 export const CATEGORIES: { value: CategorySlug | string; label: string }[] = [
   { value: "tshirt", label: "T-Shirts" },
   { value: "shorts", label: "Shorts" },
+  { value: "hoodie", label: "Hoodies" },
 ];

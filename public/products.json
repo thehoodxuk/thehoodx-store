@@ -118,5 +118,15 @@
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["White"],
     "categoryId": "tshirt"
+  },
+  {
+    "id": "hoodie-classic-black",
+    "name": "Classic Hoodie - Black",
+    "description": "Premium quality classic hoodie in black.",
+    "price": 60,
+    "image": "/collections/black-h-d-dynasty.png",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black"],
+    "categoryId": "hoodie"
   }
 ]
