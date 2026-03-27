@@ -14,7 +14,8 @@
     "name": "Royal - Black",
     "description": "The Royal edition in classic black.",
     "price": 35,
-    "image": "/collections/black-r-yal.png",
+    "image": "/collections/black-r-yal-front.png",
+    "hoverImage": "/collections/black-r-yal-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black"],
     "categoryId": "tshirt"
@@ -24,7 +25,8 @@
     "name": "Throne - Black",
     "description": "Claim your throne in black.",
     "price": 35,
-    "image": "/collections/black-throne.jpg",
+    "image": "/collections/black-throne-front.jpg",
+    "hoverImage": "/collections/black-throne-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black"],
     "categoryId": "tshirt"
@@ -34,7 +36,8 @@
     "name": "Edition 1 - Blue",
     "description": "The first edition classic in blue.",
     "price": 35,
-    "image": "/collections/blue-edition-1.png",
+    "image": "/collections/blue-edition-front.png",
+    "hoverImage": "/collections/blue-edition-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Blue"],
     "categoryId": "tshirt"
@@ -44,7 +47,8 @@
     "name": "Edition 1 - Brown",
     "description": "The first edition classic in brown.",
     "price": 35,
-    "image": "/collections/brown-edition-1.png",
+    "image": "/collections/brown-edition-front.png",
+    "hoverImage": "/collections/brown-edition-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Brown"],
     "categoryId": "tshirt"
@@ -54,7 +58,8 @@
     "name": "Edition 1 - Pink",
     "description": "The first edition classic in pink.",
     "price": 35,
-    "image": "/collections/pink-edition-1.png",
+    "image": "/collections/pink-edition-front.png",
+    "hoverImage": "/collections/pink-edition-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Pink"],
     "categoryId": "tshirt"
@@ -94,7 +99,8 @@
     "name": "Royal - White",
     "description": "The Royal edition in clean white.",
     "price": 35,
-    "image": "/collections/white-r-yal.png",
+    "image": "/collections/white-r-yal-front.png",
+    "hoverImage": "/collections/white-r-yal-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["White"],
     "categoryId": "tshirt"
@@ -104,7 +110,8 @@
     "name": "Edition 1 - White",
     "description": "The first edition classic in white.",
     "price": 35,
-    "image": "/collections/white-edition-1.png",
+    "image": "/collections/white-edition-front.png",
+    "hoverImage": "/collections/white-edition-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["White"],
     "categoryId": "tshirt"
@@ -114,7 +121,8 @@
     "name": "Throne - White",
     "description": "Claim your throne in white.",
     "price": 35,
-    "image": "/collections/white-throne.jpg",
+    "image": "/collections/white-throne-front.jpg",
+    "hoverImage": "/collections/white-throne-back.png",
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["White"],
     "categoryId": "tshirt"

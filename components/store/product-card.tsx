@@ -18,13 +18,27 @@ export function ProductCard({ product }: ProductCardProps) {
     >
       {/* Fixed tall rectangle — mirrors reference CSS `height:450px; object-fit:contain` */}
       <div className="relative w-full overflow-hidden rounded-t-2xl bg-[#f5f5f5] dark:bg-neutral-900" style={{ height: "450px" }}>
+        {/* Front Image */}
         <Image
           src={product.image || "/placeholder.jpg"}
           alt={product.name}
           fill
-          className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+          className={`object-contain transition-all duration-500 ease-out group-hover:scale-105 ${
+            product.hoverImage ? "opacity-100 group-hover:opacity-0" : ""
+          }`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+        
+        {/* Back Image (Hover State) */}
+        {product.hoverImage && (
+          <Image
+            src={product.hoverImage}
+            alt={`${product.name} Back`}
+            fill
+            className="object-contain opacity-0 transition-all duration-500 ease-out group-hover:scale-105 group-hover:opacity-100"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        )}
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
 

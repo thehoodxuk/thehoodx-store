@@ -17,6 +17,7 @@ export const ProductSchema = z.object({
   description: z.string(),
   price: z.number(),
   image: z.string().optional(),
+  hoverImage: z.string().optional(),
   sizes: z.array(z.string()).optional(),
   colors: z.array(z.string()).optional(),
   featured: z.boolean().optional(),
