@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { ArrowLeft, Lock, ShieldCheck } from "lucide-react";
@@ -36,10 +36,68 @@ export default function CheckoutPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    control,
+    formState: { errors, isValid },
   } = useForm<ShippingFormData>({
     resolver: zodResolver(shippingSchema),
+    mode: "onChange",
   });
+
+  const address = useWatch({ control, name: "address" });
+  const city = useWatch({ control, name: "city" });
+  const postalCode = useWatch({ control, name: "postalCode" });
+  const country = useWatch({ control, name: "country" });
+
+  const [taxAmount, setTaxAmount] = useState<number>(0);
+  const [isCalculatingTax, setIsCalculatingTax] = useState(false);
+
+  useEffect(() => {
+    // Only fetch if we have enough address data to calculate tax
+    const hasLocation = Boolean(address?.trim() && city?.trim() && postalCode?.trim() && country?.trim());
+    
+    console.log("Tax Calc Check: ", { hasLocation, address, city, postalCode, country });
+
+    if (hasLocation && items.length > 0) {
+      const timer = setTimeout(async () => {
+        setIsCalculatingTax(true);
+        try {
+          const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+          console.log("Fetching tax from:", `${backendUrl}/calculate-tax`);
+          const res = await fetch(`${backendUrl}/calculate-tax`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              items: items.map((item) => ({
+                name: item.product.name,
+                price: item.product.price,
+                quantity: item.quantity,
+              })),
+              shipping_address: {
+                line1: address,
+                city: city,
+                postal_code: postalCode,
+                country: country,
+              },
+            }),
+          });
+          const data = await res.json();
+          if (data.tax_amount_exclusive !== undefined) {
+             setTaxAmount(data.tax_amount_exclusive / 100);
+          } else {
+             setTaxAmount(0);
+          }
+        } catch (error) {
+          console.error("Failed to calculate tax:", error);
+          setTaxAmount(0);
+        } finally {
+          setIsCalculatingTax(false);
+        }
+      }, 800);
+      return () => clearTimeout(timer);
+    } else {
+      setTaxAmount(0);
+    }
+  }, [address, city, postalCode, country, items]);
 
   // ── Empty Cart ─────────────────────────────────────────────
   if (items.length === 0) {
@@ -95,7 +153,7 @@ export default function CheckoutPage() {
   };
 
   const shippingCost = 0;
-  const total = totalPrice + shippingCost;
+  const total = totalPrice + shippingCost + taxAmount;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -271,7 +329,7 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* ── Right: Order Summary ─────────────────────────── */}
+        {/* ── Right: Order Summary */}
         <div className="lg:col-span-2">
           <div className="sticky top-8 space-y-6 rounded-2xl border border-border bg-muted/20 p-6">
             <h2 className="text-lg font-bold uppercase tracking-wide">
@@ -325,6 +383,20 @@ export default function CheckoutPage() {
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Shipping</span>
                 <span className="font-semibold text-green-600">Free</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Tax</span>
+                <span className="font-semibold text-foreground">
+                  {isCalculatingTax ? (
+                    <span className="flex h-5 w-5 items-center justify-center">
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                    </span>
+                  ) : taxAmount > 0 ? (
+                    formatPrice(taxAmount)
+                  ) : (
+                    "Pending detail"
+                  )}
+                </span>
               </div>
             </div>
 
